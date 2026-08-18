@@ -1,0 +1,25 @@
+{
+  "name": "@vue-course/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
+  "private": true,
+  "devDependencies": {
+    "@nx/js": "23.1.1",
+    "@nx/vite": "23.1.1",
+    "@nx/vue": "^23.1.1",
+    "@nx/web": "^23.1.1",
+    "@nx/workspace": "23.1.1",
+    "@swc/core": "~1.15.5",
+    "@swc/helpers": "~0.5.18",
+    "@types/node": "^22.0.0",
+    "jiti": "2.4.2",
+    "nx": "23.1.1",
+    "prettier": "~3.6.2",
+    "swc-loader": "0.1.15",
+    "tslib": "^2.3.0",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.0",
+    "vue": "^3.5.41"
+  }
+}
