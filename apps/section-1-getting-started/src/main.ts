@@ -1,6 +1,6 @@
 declare const Vue: typeof import('vue');
 
-const {createApp} = Vue;
+const { createApp } = Vue;
 
 // Section 1 - Getting Started
 // const buttonEl = document.querySelector('button')!;
@@ -23,15 +23,15 @@ createApp({
   data() {
     return {
       goals: [] as string[],
-      enteredValue: ''
+      enteredValue: '',
     };
   },
   methods: {
     handleAddGoal() {
       this.goals.push(this.enteredValue);
-    }
-  }
+    },
+  },
 })
-// mount() renders the component into the DOM element matching '#app',
-// replacing its static HTML with Vue's reactive, virtual-DOM-driven output
+  // mount() renders the component into the DOM element matching '#app',
+  // replacing its static HTML with Vue's reactive, virtual-DOM-driven output
   .mount('#app');
