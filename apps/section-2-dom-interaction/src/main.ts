@@ -7,18 +7,27 @@ const app = createApp({
     return {
       counter: 0,
       name: '',
+      lastName: '',
       confirmedName: '',
     };
   },
   computed: {
     // Calling this as a method in the template ({{ fullName() }}) is bad:
     // Vue can't track its dependencies, so it re-runs on every render.
-    // As a computed property, it caches and only recomputes when `name` changes.
+    // As a computed property, it caches and only recomputes when `name` or `lastName` changes.
     fullName() {
-      if (!this.name) return '';
+      if (!this.name && !this.lastName) return '';
 
-      return this.name + ' Johnson';
-    }
+      return `${this.name} ${this.lastName}`.trim();
+    },
+  },
+  watch: {
+    // Watchers observe a reactive property (data or computed) and execute side effects when it changes.
+    // Unlike computed properties (which return values for the template), watchers are best for tasks like
+    // running async operations, setting timers, or logging. They receive (newValue, oldValue) automatically.
+    counter(currentValue, previousValue) {
+      console.log('Counter changed from ' + previousValue + ' to ' + currentValue);
+    },
   },
   methods: {
     add(amount: number) {
@@ -34,6 +43,7 @@ const app = createApp({
     },
     resetInput() {
       this.name = '';
+      this.lastName = '';
     },
     setConfirmedName(event: Event) {
       if (event.target instanceof HTMLInputElement) {
