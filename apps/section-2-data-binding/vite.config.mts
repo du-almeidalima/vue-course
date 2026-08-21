@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  cacheDir: '../../node_modules/.vite/apps/section-2-basic-core-concepts-dom-interaction-with-vue',
+  cacheDir: '../../node_modules/.vite/apps/section-2-data-binding',
   server: {
     port: 4200,
     host: 'localhost',
@@ -16,7 +16,7 @@ export default defineConfig(() => ({
     tsconfigPaths: true,
   },
   build: {
-    outDir: '../../dist/apps/section-2-basic-core-concepts-dom-interaction-with-vue',
+    outDir: '../../dist/apps/section-2-data-binding',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {

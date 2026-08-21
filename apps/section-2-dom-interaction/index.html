@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Section 2 - DOM Interaction</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/src/styles.css" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<header>
+  <h1>Vue Events</h1>
+</header>
+<section id="events">
+  <h2>Events in Action</h2>
+  <button v-on:click="add(5)">Add 5</button>
+  <button v-on:click.middle="subtract(5)">Remove 5</button>
+  <p v-once>Starting Counter: {{ counter }}</p>
+  <p>Result: {{ counter }}</p>
+  <br />
+  <!-- v-model for Two-Way Binding -->
+  <input type="text"
+         placeholder="Enter your name"
+         name="name"
+         v-model="name"
+         v-on:keyup.enter="setConfirmedName($event)"
+  />
+  <!-- Manual Two-Way Binding -->
+  <!--  <input type="text"-->
+  <!--         placeholder="Enter your name"-->
+  <!--         name="name"-->
+  <!--         v-bind:value="name"-->
+  <!--         v-on:input="setName($event)"-->
+  <!--         v-on:keyup.enter="setConfirmedName($event)">-->
+  <!--  <input type="text" placeholder="Enter your name" name="name" v-on:input="setName($event)">-->
+  <button type="button" v-on:click="resetInput">Reset Name Input</button>
+  <p>Your Name: {{ confirmedName }}</p>
+  <br />
+  <h2>Form</h2>
+  <!--
+    Event Modifiers (.prevent, .stop, .enter, .middle, etc.):
+    Directives can take modifiers (prefixed with a dot) that handle common DOM event mechanics declaratively.
+    - .prevent calls event.preventDefault() (e.g. stops page reload on form submit).
+    - .stop calls event.stopPropagation() (prevents event bubbling).
+    - Key modifiers like .enter or .esc listen to specific keystrokes.
+    - Mouse modifiers like .middle, .left, or .right restrict clicks to specific buttons.
+    This separates DOM plumbing from business logic in methods and supports chaining (e.g., @click.stop.prevent).
+  -->
+  <form v-on:submit.prevent="handleSubmit">
+    <input type="text" name="title" placeholder="Enter a title" />
+    <button>Add Item</button>
+  </form>
+</section>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
