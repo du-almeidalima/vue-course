@@ -10,6 +10,16 @@ const app = createApp({
       confirmedName: '',
     };
   },
+  computed: {
+    // Calling this as a method in the template ({{ fullName() }}) is bad:
+    // Vue can't track its dependencies, so it re-runs on every render.
+    // As a computed property, it caches and only recomputes when `name` changes.
+    fullName() {
+      if (!this.name) return '';
+
+      return this.name + ' Johnson';
+    }
+  },
   methods: {
     add(amount: number) {
       this.counter += amount;
