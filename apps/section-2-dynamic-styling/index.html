@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Section 2 - Dynamic Styling</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/src/styles.css" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<header>
+  <h1>Vue Dynamic Styling</h1>
+</header>
+<section id="styling">
+<!--  Dynamic Styling -->
+<!--  <div class="demo" :style="{borderColor: selectedBox === 'A' ? 'red' : '#CCC' }" @click="handleBoxClick('A')"></div>-->
+<!--  <div class="demo" :style="{borderColor: selectedBox === 'B' ? 'red' : '#CCC' }" @click="handleBoxClick('B')"></div>-->
+<!--  <div class="demo" :style="{borderColor: selectedBox === 'C' ? 'red' : '#CCC' }" @click="handleBoxClick('C')"></div>-->
+  <!--
+    1. Static & Dynamic Class Merging + Computed Property Syntax (Lesson 37):
+    Vue merges static `class="demo"` with dynamic `:class`. Moving complex class logic to a computed
+    property (`boxAClasses`) keeps the HTML template clean, declarative, and maintainable.
+  -->
+  <div class="demo" :class="boxAClasses" @click="handleBoxClick('A')"></div>
+
+  <!--
+    2. Inline Object Syntax:
+    Direct inline object `{ active: selectedBox === 'B' }` toggles classes based on truthy/falsy expressions.
+  -->
+  <div class="demo" :class="{ active: selectedBox === 'B' }" @click="handleBoxClick('B')"></div>
+
+  <!--
+    3. Dynamic Classes: Array Syntax (Lesson 38):
+    `:class="['demo', { active: ... }]"` allows combining multiple static classes, dynamic class objects,
+    or ternary expressions inside a single array.
+  -->
+  <div :class="['demo', { active: selectedBox === 'C' }]" @click="handleBoxClick('C')"></div>
+</section>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
