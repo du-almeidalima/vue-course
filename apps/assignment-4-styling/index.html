@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Assignment 4 - Dynamic Styling</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/src/styles.css" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<header>
+  <h1>Vue Styling</h1>
+</header>
+<section id="assignment">
+  <!-- 1) Fetch the user input and use it as a CSS class -->
+  <!-- The entered class should be added to the below paragraph -->
+  <span>Select User Class:</span>
+  <input type="radio" id="user-class-1" value="user1" v-model="userClass" />
+  <label for="user-class-1">User 1</label>
+
+  <input type="radio" id="user-class-2" value="user2" v-model="userClass" />
+  <label for="user-class-2">User 2</label>
+
+  <!-- (available classes: "user1", "user2") -->
+  <p :class="[userClass, visible ? 'visible' : 'hidden']">Style me!</p>
+  <button @click="toggleVisibility">Toggle Paragraph</button>
+  <!-- 2) Use the "visible" and "hidden" classes to show/ hide the above paragraph -->
+  <!-- Clicking the button should toggle between the two options -->
+
+  <!-- 3) Add dynamic inline styling to the below paragraph and let the user enter a background-color -->
+  <input type="text" v-model="backgroundColor" />
+  <p :style="{ backgroundColor }">Style me inline!</p>
+</section>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
