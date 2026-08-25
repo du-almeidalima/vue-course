@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Section 3 - Rendering Conditional Content & Lists</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/src/styles.css" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<header>
+  <h1>Vue Course Goals</h1>
+</header>
+<section id="user-goals">
+  <h2>My course goals</h2>
+  <input type="text" v-model="newGoal" @keyup.enter="addGoal" />
+  <button @click="addGoal">Add Goal</button>
+  <!--
+    Conditional Rendering (v-if, v-else-if, v-else vs v-show):
+    - v-if / v-else-if / v-else completely mounts or unmounts elements in the DOM.
+    - v-show toggles CSS 'display: none' without unmounting, ideal for elements that toggle frequently.
+    - v-else and v-else-if must immediately follow the paired v-if element (or use <template> to group).
+  -->
+  <ul v-if="goals.length">
+    <!--
+      v-for (List Rendering & Iteration Patterns):
+      - Arrays: '(item, index) in items' gives access to the current element and its 0-based index.
+      - Objects: '(value, key, index) in object' extracts values, property names, and indices.
+      - Numeric Ranges: 'num in 10' iterates from 1 to 10.
+    -->
+    <!--
+      The :key Attribute & DOM State Preservation:
+      - Always bind a unique, stable identifier (e.g. :key="goal.id") when rendering dynamic lists.
+      - Avoid using the array index as key when items can be removed, reordered, or contain state.
+      - Keys guide Vue's Virtual DOM diffing algorithm to correctly identify, move, or remove specific
+        DOM nodes without leaking internal state (e.g. input text or focus) to sibling elements.
+    -->
+    <li v-for="(goal, index) in goals" @click="removeGoal(index)" :key="goal.id">
+      <p>{{ goal.text }} - {{ index }}</p>
+      <input type="text" @click.stop />
+    </li>
+  </ul>
+  <p v-else>No goals have been added yet - please start adding some!</p>
+</section>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

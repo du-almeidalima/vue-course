@@ -1,0 +1,9 @@
+{
+  "name": "section-3-rendering-conditional-content-and-lists",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/section-3-rendering-conditional-content-and-lists/src",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project section-3-rendering-conditional-content-and-lists --web",
+  "targets": {}
+}
