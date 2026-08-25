@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Assignment 5 - Lists & Conditional Content</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/src/styles.css" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<header>
+  <h1>Vue Lists and Conditional Content</h1>
+</header>
+<section id="assignment">
+  <h2>Assignment</h2>
+  <!-- 1) Add code to manage a list of tasks in a Vue app -->
+  <!-- When clicking "Add Task" a new task with the entered text should be added -->
+  <input type="text" v-model="taskText" @keyup.enter="addTask" />
+  <button @click="addTask">Add Task</button>
+  <ul v-if="showTasks">
+    <!-- 2) Output the list of tasks here -->
+    <li v-for="task of tasks" :key="task.id" @click="removeTask(task.id)">
+      <p>{{ task.text }}</p>
+      <small style="font-size: 0.75em;">ID: {{ task.id }}</small>
+    </li>
+  </ul>
+  <!-- 3) When the below button is pressed, the list should be shown or hidden -->
+  <!-- BONUS: Also update the button caption -->
+  <button @click="toggleShowTasks">{{ showTasks ? 'Hide List' : 'Show List' }}</button>
+</section>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
