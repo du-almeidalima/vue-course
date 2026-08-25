@@ -1,0 +1,9 @@
+{
+  "name": "section-4-course-project-monster-slayer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/section-4-course-project-monster-slayer/src",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project section-4-course-project-monster-slayer --web",
+  "targets": {}
+}

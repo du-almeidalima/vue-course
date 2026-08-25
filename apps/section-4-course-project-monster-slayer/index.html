@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Section 4 - Monster Slayer Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/src/styles.css" />
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<header>
+  <h1>Monster Slayer</h1>
+</header>
+<div id="game">
+  <section id="monster" class="container">
+    <h2>Monster Health</h2>
+    <progress class="healthbar" :class="getHealthBarClass(monster.health)" max="100"
+              :value="monster.health"></progress>
+  </section>
+  <section id="player" class="container">
+    <h2>Your Health</h2>
+    <progress class="healthbar" :class="getHealthBarClass(player.health)" max="100" :value="player.health"></progress>
+  </section>
+  <!-- Task 5: Game Over Screen (Static HTML Skeleton) -->
+  <section class="container" v-if="gameStatus !== 'IN_PROGRESS'">
+    <h2>Game Over!</h2>
+    <h3 v-if="gameStatus === 'PLAYER_WIN'">You won!</h3>
+    <h3 v-else-if="gameStatus === 'MONSTER_WIN'">You lost!</h3>
+    <h3 v-else>It's a draw!</h3>
+    <button @click="restart">Start New Game</button>
+  </section>
+
+  <section id="controls" v-if="gameStatus === 'IN_PROGRESS'">
+    <button @click="processRoundAction('ATTACK')">ATTACK</button>
+    <button @click="processRoundAction('SPECIAL_ATTACK')" :disabled="!isSpecialAttackEnabled">SPECIAL ATTACK</button>
+    <button @click="processRoundAction('HEAL')" :disabled="!isHealEnabled">HEAL</button>
+    <button @click="processRoundAction('SURRENDER')">SURRENDER</button>
+  </section>
+  <section id="log" class="container">
+    <h2>Battle Log</h2>
+    <ul v-if="logs.length" class="log-list">
+      <li v-for="log in logs" :key="log.round" class="log-round">
+        <div class="log-round__header">
+          <span class="log-round__badge">ROUND {{ log.round }}</span>
+        </div>
+
+        <div class="log-round__events">
+          <!-- Player Action -->
+          <div class="log-entry log-entry--player">
+            <span class="log-avatar log-avatar--player">PLAYER</span>
+            <span v-if="log.action === 'ATTACK'" class="log-description">
+              strikes with <strong>Basic Attack</strong> dealing
+              <span class="log-chip log-chip--damage">-{{ log.playerActionValue }} HP</span>
+            </span>
+            <span v-else-if="log.action === 'SPECIAL_ATTACK'" class="log-description">
+              unleashes <strong class="log-crit">⚡ CRITICAL STRIKE</strong> dealing
+              <span class="log-chip log-chip--crit">-{{ log.playerActionValue }} HP</span>
+            </span>
+            <span v-else-if="log.action === 'HEAL'" class="log-description">
+              casts <strong class="log-heal-spell">✨ REJUVENATION</strong> restoring
+              <span class="log-chip log-chip--heal">+{{ log.playerActionValue }} HP</span>
+            </span>
+            <span v-else-if="log.action === 'SURRENDER'" class="log-description">
+              🏳️ raises the white flag and <strong>Surrenders</strong>!
+            </span>
+          </div>
+
+          <!-- Monster Retaliation -->
+          <div v-if="log.action !== 'SURRENDER'" class="log-entry log-entry--monster">
+            <span class="log-avatar log-avatar--monster">MONSTER</span>
+            <span class="log-description">
+              retaliates with <strong>Counter Attack</strong> dealing
+              <span class="log-chip log-chip--damage">-{{ log.monsterDamage }} HP</span>
+            </span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <p v-else class="log-empty">⚔️ No battle actions yet. Make your first move!</p>
+  </section>
+</div>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
